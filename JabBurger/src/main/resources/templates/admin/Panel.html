@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/panel.css}">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Barra lateral -->
+            <div class="sidebar">
+                <!-- Nuevo div para el logo -->
+                <div class="sidebar-logo">
+                    <!-- Aquí puedes añadir tu logo -->
+                    <img th:src="@{/images/logo.jpg}" alt="Logo de JabBurger">
+                </div>
+                <nav>
+                    <div class="main-menu">
+                        <a th:href="@{/admin/inicio}" class="nav-link"><i class="fas fa-home"></i>Inicio</a>
+                        <a th:href="@{/admin/productos}" class="nav-link"><i class="fas fa-box"></i>Productos</a>
+                        <a th:href="@{/admin/ventas}" class="nav-link"><i class="fas fa-shopping-cart"></i>Ventas</a>
+                        <a th:href="@{/admin/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i>Pedidos</a>
+                        <a th:href="@{/admin/clientes}" class="nav-link"><i class="fas fa-users"></i>Clientes</a>
+                        <a th:href="@{/admin/usuarios}" class="nav-link"><i class="fas fa-user"></i>Usuarios</a>
+                    </div>
+                    <div class="bottom-menu">
+                        <a th:href="@{/logout}" class="nav-link"><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="content-area">
+                <div class="products-header">
+                    <h1>Productos</h1>
+                </div>
+
+                <div class="product-list-area">
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="producto : ${productos}">
+                                <td th:text="${producto.id}">1</td>
+                                <td th:text="${producto.nombre}">Producto A</td>
+                                <td th:text="${'$' + producto.precio}">$19.99</td>
+                                <td th:text="${producto.stock}">50</td>
+                                <td>
+                                    <a th:href="@{/admin/productos/editar/{id}(id=${producto.id})}" class="btn btn-primary">Editar</a>
+                                    <a th:href="@{/admin/productos/eliminar/{id}(id=${producto.id})}" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <a th:href="@{/admin/productos/agregar}" id="add-product-btn" class="btn btn-primary">Agregar Producto</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

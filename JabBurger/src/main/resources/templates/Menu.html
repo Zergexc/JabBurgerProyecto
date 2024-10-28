@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JabBurger - Menú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+
+<body>
+    <nav class="raleway-bold menu-principal">
+        <a th:href="@{/inicio}" class="logo-container">
+            <img class="logo" th:src="@{/images/logo.jpg}" alt="Logo">
+            <span class="logo-text">JabBurger</span>
+        </a>
+        <ul class="nav-links">
+            <li><a th:href="@{/menu}">Menú</a></li>
+            <li><a th:href="@{/personalizar}">Personalice su Hamburguesa</a></li>
+            <li><a th:href="@{/ubiquenos}">Ubíquenos</a></li>
+            <li><a th:href="@{/acercadenosotros}">Acerca de nosotros</a></li>
+        </ul>
+        <div class="menu-derecha">
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/perfil}" class="icono-menu">
+                    <i class="fas fa-user"></i>
+                    <span th:text="${#authentication.name}"></span>
+                </a>
+            </div>
+            <div class="menu-icons">
+                <a th:href="@{/login}" title="Iniciar sesión"><i class="fas fa-user"></i></a>
+                <a href="#" title="Carrito" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <aside class="filter-menu">
+            <h2>Filtrar por:</h2>
+            <ul>
+                <li><a href="#" data-filter="all" class="active"><i class="fas fa-utensils"></i> Todos</a></li>
+                <li><a href="#" data-filter="hamburguesas"><i class="fas fa-hamburger"></i> Hamburguesas</a></li>
+                <li><a href="#" data-filter="bebidas"><i class="fas fa-glass-martini-alt"></i> Bebidas</a></li>
+                <li><a href="#" data-filter="combos"><i class="fas fa-concierge-bell"></i> Combos</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-content">
+            <h1>Nuestra Carta</h1>
+            <div class="container">
+                <!--Hamburguesas -->
+                <div class="card" data-category="hamburguesas">
+                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 1">
+                    <div class="card-content">
+                        <h3>Hamburguesa de Res</h3>
+                        <p>Deliciosa hamburguesa de res con queso, lechuga, tomate y cebolla. Servida con patatas fritas.</p>
+                        <p class="price">S/10.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="hamburguesas">
+                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 2">
+                    <div class="card-content">
+                        <h3>Hamburguesa Doble</h3>
+                        <p>Doble carne de res, doble queso, lechuga, tomate y nuestra salsa especial. Acompañada de papas fritas.</p>
+                        <p class="price">S/12.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="hamburguesas">
+                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 2">
+                    <div class="card-content">
+                        <h3>Hamburguesa Doble</h3>
+                        <p>Doble carne de res, doble queso, lechuga, tomate y nuestra salsa especial. Acompañada de papas fritas.</p>
+                        <p class="price">S/12.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="hamburguesas">
+                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 2">
+                    <div class="card-content">
+                        <h3>Hamburguesa Doble</h3>
+                        <p>Doble carne de res, doble queso, lechuga, tomate y nuestra salsa especial. Acompañada de papas fritas.</p>
+                        <p class="price">S/12.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <!--Bebidas -->
+                <div class="card" data-category="bebidas">
+                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
+                    <div class="card-content">
+                        <h3>Coca Cola</h3>
+                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
+                        <p class="price">S/2.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="bebidas">
+                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
+                    <div class="card-content">
+                        <h3>Coca Cola</h3>
+                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
+                        <p class="price">S/2.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="bebidas">
+                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
+                    <div class="card-content">
+                        <h3>Coca Cola</h3>
+                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
+                        <p class="price">S/2.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="bebidas">
+                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
+                    <div class="card-content">
+                        <h3>Coca Cola</h3>
+                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
+                        <p class="price">S/2.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <!--Combos -->
+                <div class="card" data-category="combos">
+                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
+                    <div class="card-content">
+                        <h3>Combo Hamburguesa</h3>
+                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
+                        <p class="price">S/15.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="combos">
+                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
+                    <div class="card-content">
+                        <h3>Combo Hamburguesa</h3>
+                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
+                        <p class="price">S/15.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="combos">
+                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
+                    <div class="card-content">
+                        <h3>Combo Hamburguesa</h3>
+                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
+                        <p class="price">S/15.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+                <div class="card" data-category="combos">
+                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
+                    <div class="card-content">
+                        <h3>Combo Hamburguesa</h3>
+                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
+                        <p class="price">S/15.00</p>
+                        <button>Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cart" class="cart">
+            <div class="cart-header">
+                <h2>Carrito</h2>
+                <button id="close-cart" class="close-cart">&times;</button>
+            </div>
+            <ul id="cart-items"></ul>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount">$<span id="cart-total">0.00</span></span>
+            </div>
+            <button id="checkout-button">Pagar</button>
+        </div>
+    </main>
+
+    <script th:src="@{/js/menu.js}"></script>
+</body>
+
+</html>

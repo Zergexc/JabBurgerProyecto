@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: "Readex Pro", sans-serif;
+    background-color: #111;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/*Header*/
+.menu-principal {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.menu-principal.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.logo-text {
+    color: #FED944;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.nav-links li {
+    padding: 0 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #FED944;
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #FED944;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.menu-icons {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icons a {
+    color: white;
+    font-size: 20px;
+    margin-left: 25px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}   
+
+.menu-icons a:hover {
+    color: #FED944;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #FED944;
+    color: black;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+main {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    background-color: #000000;
+}
+
+.cart {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 50%;
+    color: #FED944;
+    border-right: solid #FED944 1px;
+    padding-right: 40px;
+    margin: 20px;
+}
+
+.cart h2 {
+    margin-left: 30px;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    color: #ffd700;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    max-width: 70%;
+}
+
+.cart-items {
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    margin: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 102px 10px 2px;
+    color: black;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.item-details {
+    flex: 2;
+}
+
+.item-details h3 {  
+    margin: 5px 0; /* Ajusta el espacio superior e inferior del título */
+    font-size: 18px; /* Ajusta el tamaño de la fuente si es necesario */
+}
+
+.item-details p {
+    margin: 3px 0; /* Ajusta el espacio superior e inferior del párrafo */
+    font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
+}
+
+
+.item-quantity {
+    width: 50px;
+    text-align: center;
+    padding-right: 40px;
+    font-size: 30px;
+}
+
+.payment {
+    background: #1e1e1e;
+    border-radius: 15px;
+    padding: 30px;
+    padding-right: 48px;
+    color: #fff;
+    max-width: 400px;
+    margin-left: 50px;
+    margin-right: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.card-icons {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.card-visa, .card-yape, .card-mastercard {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px; /* Ajusta el tamaño según sea necesario */
+    height: 25px; /* Ajusta el tamaño según sea necesario */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-icon {
+    width: 80%; /* Asegura que el ícono ocupe el espacio disponible */
+    height: auto;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+    padding: 2px;
+}
+
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background: #2b2b2b;
+    color: #fff;
+    font-size: 0.95em;
+}
+
+.dual-input {
+    display: flex;
+    gap: 50px;
+}
+
+.dual-input div {
+    flex: 1;
+}
+
+.form-group label {
+    margin-bottom: 5px; /* Ajusta el valor según lo que necesites */
+    display: block; /* Asegura que el margin-bottom se aplique correctamente */
+}
+
+
+.invoice-type {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+    margin-right: 200px;
+}
+
+.invoice-type input {
+    margin-right: 5px;
+}
+
+
+
+.summary {
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    color: #fff;
+}
+
+.summary p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary span {
+    font-weight: bold;
+}
+
+button {
+    background-color: #ffbf00;
+    color: #111;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #e5a800;
+}
+
+@media (max-width: 480px) {
+    .payment {
+        padding: 20px;
+    }
+    .card-icons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card-icon {
+        width: 50px;
+    }
+}
+
+.alert {
+    background-color: #333; /* Fondo negro */
+    color: white; /* Texto blanco */
+    padding: 15px; /* Espaciado interno */
+    margin: 15px 0; /* Margen superior e inferior */
+    border-radius: 5px; /* Bordes redondeados */
+    display: none; /* Oculto por defecto */
+    font-weight: bold; /* Texto en negrita */
+    position: relative; /* Posicionamiento relativo para el icono */
+}
+
+.alert .closebtn {
+    position: absolute; /* Posición absoluta para el botón de cierre */
+    top: 0;
+    right: 10px; /* Espaciado desde la derecha */
+    color: white; /* Color del botón de cierre */
+    font-weight: bold; /* Negrita */
+    font-size: 18px; /* Tamaño del botón de cierre */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+}
+
+.alert .closebtn:hover {
+    color: #f1f1f1; /* Color al pasar el ratón */
+}

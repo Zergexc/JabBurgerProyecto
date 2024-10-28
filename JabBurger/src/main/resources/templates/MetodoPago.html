@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jab Burger - Carrito de Compra</title>
+    <link rel="stylesheet" href="../Css/MetodoPago.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</body>
+</html>
+</head>
+<body>
+    <nav class="raleway-bold menu-principal">
+        <a href="../Html/Inicio.html" class="logo-container">
+            <img class="logo" src="../img/logo.jpg" alt="Logo">
+            <span class="logo-text">JabBurguer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../Html/Menu.html">Menu</a></li>
+            <li><a href="../Html/PersonalizarH.html">Personalice su Hamburguesa</a></li>
+            <li><a href="">Ubíquenos</a></li>
+            <li><a href="">Acerca de nosotros</a></li>
+        </ul>
+        <div class="menu-icons">
+            <a href="../Html/Login.html" title="Iniciar sesión"><i class="fas fa-user"></i></a>
+            <a href="#" title="Carrito" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+    
+    <main>
+        <section class="cart">
+            <h2>Continuar con la compra</h2>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="../img/producto.png" alt="Hamburguesa 1">
+                    <div class="item-details">
+                        <h3>Hamburguesa 1</h3>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="item-quantity">
+                        <span> <strong>5 </strong></span>
+                    </div>
+                    <div class="item-price">
+                        <p>S/ 20.00</p>
+                    </div>
+                </div>
+                <!-- Repetir cart-item para otros productos -->
+            </div>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="../img/producto.png" alt="Hamburguesa 1">
+                    <div class="item-details">
+                        <h3>Hamburguesa 1</h3>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="item-quantity">
+                        <span> <strong>5 </strong></span>
+                    </div>
+                    <div class="item-price">
+                        <p>S/ 20.00</p>
+                    </div>
+                </div>
+                <!-- Repetir cart-item para otros productos -->
+            </div>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="../img/producto.png" alt="Hamburguesa 1">
+                    <div class="item-details">
+                        <h3>Hamburguesa 1</h3>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="item-quantity">
+                        <span> <strong>5 </strong></span>
+                    </div>
+                    <div class="item-price">
+                        <p>S/ 20.00</p>
+                    </div>
+                </div>
+                <!-- Repetir cart-item para otros productos -->
+            </div>
+        </section>
+        
+        <section class="payment">
+            <div id="error-alert" style="display: none">
+                <span id="error-message"></span>
+                <button onclick="document.getElementById('error-alert').style.display='none'">Cerrar</button>
+            </div>
+            <h2>Detalles de la tarjeta</h2>
+            <form id="payment-form">
+                <div class="card-icons">
+                    <div class="card-visa">
+                    <img src="../img/visa-logo.png" alt="Visa" class="card-icon">
+                    </div>
+                    <div class="card-yape">
+                    <img src="../img/yape.png" alt="Yape" class="card-icon">
+                </div>
+                <div class="card-mastercard">
+                    <img src="../img/mastercard.png" alt="MasterCard" class="card-icon">
+                </div>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Número de la tarjeta</label>
+                    <input type="text" id="card-number" placeholder="1111 2222 3333 4444" required maxlength="16">
+                </div>
+                <div class="form-group dual-input">
+                    <div>
+                        <label for="expiry-date">Fecha de expiración</label>
+                        <input type="text" id="expiry-date" placeholder="MM/AA" required maxlength="5">
+                    </div>
+                    <div>
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de comprobante</label>
+                    <div class="invoice-type">
+                        <input type="radio" id="boleta" name="invoice" value="Boleta" checked>
+                        <label for="boleta">Boleta</label>
+                        <input type="radio" id="factura" name="invoice" value="Factura">
+                        <label for="factura">Factura</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ruc">RUC</label>
+                    <input type="text" id="ruc" placeholder="12345678901" required maxlength="11">
+                </div>
+                <div class="form-group">
+                    <label for="razon-social">Razón Social</label>
+                    <input type="text" id="razon-social" placeholder="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Dirección del cliente</label>
+                    <input type="text" id="address" placeholder="ej: Lima" required>
+                </div>
+                <div class="summary">
+                    <p>Subtotal: <span>S/ 60.00</span></p>
+                    <p>Delivery: <span>S/ 4.00</span></p>
+                    <p>Total: <span>S/ 64.00</span></p>
+                </div>
+                <button type="submit">Proceder con el pago</button>
+            </form>
+        </section>
+        
+    </main>
+    
+    <script src="../Javascript/MetodoPago.js"></script>
+</body>
+</html>

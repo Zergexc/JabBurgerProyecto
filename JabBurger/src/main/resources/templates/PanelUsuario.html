@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario</title>
+    <link rel="stylesheet" th:href="@{/css/userpanel.css}">
+</head>
+<body>
+    <header>
+        <h1>Bienvenido, <span th:text="${user}"></span></h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/inicio}">Inicio</a></li>
+                <li><a th:href="@{/logout}">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Mis Pedidos</h2>
+            <!-- Aquí puedes agregar una lista de pedidos -->
+        </section>
+        
+        <section>
+            <h2>Editar Perfil</h2>
+            <!-- Aquí puedes agregar un formulario para editar el perfil -->
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 JabBurger. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

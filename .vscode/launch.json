@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-JabburgerApplication<jabburger>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.jab.burger.jabburger.JabburgerApplication",
+            "projectName": "jabburger",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

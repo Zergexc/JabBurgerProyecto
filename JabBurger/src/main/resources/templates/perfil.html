@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario - JabBurguer</title>
+    <link rel="stylesheet" th:href="@{/css/perfilusuario.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Incluir el mismo nav que en Inicio.html -->
+
+    <div class="perfil-container">
+        <div th:if="${message}" class="message" th:text="${message}"></div>
+        <div th:if="${error}" class="message error" th:text="${error}"></div>
+
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#datos-personales" class="active">Datos Personales</a></li>
+                <li><a href="#cambiar-contrasena">Cambiar Contraseña</a></li>
+            </ul>
+            <form th:action="@{/logout}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn-cerrar-sesion">Cerrar Sesión</button>
+            </form>
+            <a th:href="@{/perfil/regresar}" class="btn-regresar">Regresar</a>
+        </nav>
+
+        <main class="content">
+            <section id="datos-personales" class="active">
+                <h2>Datos Personales</h2>
+                <form th:action="@{/perfil/actualizar}" method="post" th:object="${user}">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" th:field="*{apellido}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="dni">DNI:</label>
+                        <input type="text" id="dni" th:field="*{dni}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" th:field="*{email}">
+                    </div>
+                    <div class="form-group">
+                        <label for="celular">Teléfono:</label>
+                        <input type="text" id="celular" th:field="*{celular}">
+                    </div>
+                    <button type="submit">Actualizar Datos</button>
+                </form>
+            </section>
+
+            <section id="cambiar-contrasena">
+                <h2>Cambiar Contraseña</h2>
+                <form th:action="@{/perfil/cambiar-contrasena}" method="post">
+                    <div class="form-group">
+                        <label for="contrasena-actual">Contraseña Actual:</label>
+                        <input type="password" id="contrasena-actual" name="contrasenaActual" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nueva-contrasena">Nueva Contraseña:</label>
+                        <input type="password" id="nueva-contrasena" name="nuevaContrasena" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmar-contrasena">Confirmar Nueva Contraseña:</label>
+                        <input type="password" id="confirmar-contrasena" name="confirmarContrasena" required>
+                    </div>
+                    <button type="submit">Cambiar Contraseña</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Incluir el mismo footer que en Inicio.html -->
+
+    <script th:src="@{/js/perfil.js}"></script>
+</body>
+</html>
