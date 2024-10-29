@@ -1,0 +1,212 @@
+/* Estilos generales */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container-fluid {
+    padding: 0;
+    display: flex;
+}
+
+
+/* Barra lateral */
+
+.sidebar {
+    width: 280px;
+    background-color: #000000;
+    color: #ffffff;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: 20px;
+}
+
+.main-menu {
+    flex-grow: 1;
+}
+
+.sidebar-logo {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+
+/* Menú */
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 24px;
+    border-left: 4px solid transparent;
+}
+
+.nav-link i {
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.nav-link span {
+    font-size: 24px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #333333;
+    text-decoration: none;
+    color: #ffffff;
+    border-left-color: #007bff;
+}
+
+.bottom-menu {
+    margin-top: auto;
+    border-top: 1px solid #333333;
+}
+
+
+/* Área de contenido */
+
+.content-area {
+    flex: 1;
+    margin-left: 280px;
+    padding: 20px;
+}
+
+.clients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+/* Barra de búsqueda */
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 300px;
+}
+
+
+/* Tabla */
+
+.table-responsive {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+
+/* Botones */
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.btn-edit {
+    margin-right: 5px;
+}
+
+
+/* Modal */
+
+.modal-content {
+    border-radius: 8px;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    border-radius: 4px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    .sidebar-logo {
+        padding: 10px;
+    }
+    .nav-link span {
+        display: none;
+    }
+    .content-area {
+        margin-left: 60px;
+    }
+    .clients-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .search-bar {
+        width: 100%;
+    }
+    .search-bar input {
+        width: 100%;
+    }
+}

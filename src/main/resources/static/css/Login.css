@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap');
+
+/* Apply Readex Pro to the entire page */
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: "Readex Pro", sans-serif;
+    box-sizing: border-box;
+    color: white;
+}
+
+body {
+    background-color: #000000;
+}
+
+/*Header*/
+.menu-principal {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.menu-principal.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.logo-text {
+    color: #FED944;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.nav-links li {
+    padding: 0 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #FED944;
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #FED944;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.menu-icons {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icons a {
+    color: white;
+    font-size: 24px; /* Actualizado */
+    margin-left: 25px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}   
+
+.menu-icons a:hover {
+    color: #FED944;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-icon i,
+.icono-menu i {
+    font-size: 24px; /* Actualizado */
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px; /* Actualizado */
+    right: -10px; /* Actualizado */
+    width: 20px; /* Actualizado */
+    height: 20px; /* Actualizado */
+    font-size: 12px;
+}
+
+/* Login styles */
+.login-container {
+    display: flex;
+    height: calc(100vh - 80px); 
+    margin-top: 80px; 
+}
+
+.login-image {
+    flex: 1;
+    overflow: hidden;
+}
+
+.login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    min-height: 100vh; /* Para que ocupe toda la altura de la pantalla */
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+}
+
+form {
+    padding: 30px;
+}
+
+.login-form h2 {
+    color: #FED944;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 36px; 
+    font-weight: bold;
+}
+
+.form-group {
+    width: 100%;
+    max-width: 550px; 
+    margin-bottom: 25px; 
+}
+
+.form-group input {
+    width: 100%;
+    padding: 16px 18px; 
+    background-color: #2a2a2a;
+    color: white;
+    border-radius: 6px;
+    font-size: 18px; 
+    height: 50px; 
+}
+
+.login-btn {
+    width: 100%;
+    max-width: 550px; 
+    padding: 15px; 
+    background-color: #FED944;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 20px; 
+}
+
+.login-btn:hover {
+    background-color: #e5c43a;
+}
+
+.register-link {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 16px; 
+}
+
+.register-link a {
+    color: #FED944;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.menu-derecha {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icono-menu {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.icono-menu i {
+    font-size: 22px;
+    margin-right: 8px;
+}
+
+.icono-menu:hover {
+    color: #FED944;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #FED944;
+    color: black;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+}
