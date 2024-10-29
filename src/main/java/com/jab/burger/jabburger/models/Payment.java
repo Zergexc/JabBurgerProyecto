@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+// Autor: Kevin Pillaca
 @Entity
 @Table(name = "payments")
 public class Payment {
