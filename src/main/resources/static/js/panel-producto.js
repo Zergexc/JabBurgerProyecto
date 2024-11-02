@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Crear objeto con los datos del formulario
             const formData = {
                 productoID: document.getElementById('productoID').value || null,
@@ -69,32 +69,35 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Enviando datos:', formData); // Para debug
 
             fetch('/admin/productos/guardar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(async response => {
-                const text = await response.text();
-                console.log('Respuesta del servidor:', text); // Para debug
-                
-                if (!response.ok) {
-                    throw new Error(text || 'Error en el servidor');
-                }
-                
-                return text;
-            })
-            .then(() => {
-                alert('Producto guardado exitosamente');
-                window.location.reload(); // Recargar la página para ver los cambios
-            })
-            .catch(error => {
-                console.error('Error completo:', error);
-                alert('Error al guardar el producto: ' + error.message);
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(async response => {
+                    const text = await response.text();
+                    console.log('Respuesta del servidor:', text); // Para debug
+
+                    if (!response.ok) {
+                        throw new Error(text || 'Error en el servidor');
+                    }
+
+                    return text;
+                })
+                .then(() => {
+                    alert('Producto guardado exitosamente');
+                    window.location.reload(); // Recargar la página para ver los cambios
+                })
+                .catch(error => {
+                    console.error('Error completo:', error);
+                    alert('Error al guardar el producto: ' + error.message);
+                });
         });
     }
+
+    // Agregar evento para la búsqueda
+    document.getElementById('searchInput').addEventListener('keyup', buscarProductos);
 });
 
 function abrirModal(producto = null) {
@@ -130,4 +133,38 @@ function abrirModal(producto = null) {
 function cerrarModal() {
     const modal = document.getElementById('productoModal');
     modal.style.display = 'none';
+}
+
+// Función de búsqueda agregada al final
+function buscarProductos() {
+    const searchTerm = document.getElementById('searchInput').value;
+
+    fetch(`/admin/productos/buscar?searchTerm=${encodeURIComponent(searchTerm)}`)
+        .then(response => response.json())
+        .then(productos => {
+            const tbody = document.querySelector('.product-table tbody');
+            tbody.innerHTML = '';
+
+            productos.forEach((producto, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${producto.nombre}</td>
+                    <td>${producto.descripcion}</td>
+                    <td>S/${producto.precio}</td>
+                    <td>${producto.fechaVencimiento}</td>
+                    <td>${producto.unidadMedida}</td>
+                    <td>${producto.fechaIngreso}</td>
+                    <td>${producto.stock}</td>
+                    <td>${producto.categoriaProductoID}</td>
+                    <td>${producto.almacenID}</td>
+                    <td>
+                        <button class="btn btn-primary btn-editar" data-id="${producto.productoID}">Editar</button>
+                        <button class="btn btn-danger btn-eliminar" data-id="${producto.productoID}">Eliminar</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error:', error));
 }

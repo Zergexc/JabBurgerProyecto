@@ -2,69 +2,59 @@ package com.jab.burger.jabburger.controllers;
 
 import com.jab.burger.jabburger.models.User;
 import com.jab.burger.jabburger.services.UserService;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.jab.burger.jabburger.services.ExcelReportService;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Controlador que maneja la generación de reportes en formato Excel.
- * Permite exportar información de usuarios a archivos Excel.
- *
- * @author [Tu nombre]
- * @version 1.0
- * @since 2024-03-20
+ * Controlador que maneja la generación y descarga de reportes en formato Excel.
+ * Este controlador proporciona endpoints para exportar diferentes tipos de datos a Excel.
  */
 @Controller
-@RequestMapping("/admin/reportes")
+@RequestMapping("/admin/reportes") // Ruta base para todos los endpoints de reportes
 public class ReportController {
 
+    // Inyección de dependencias usando @Autowired
     @Autowired
-    private UserService userService;
+    private UserService userService; // Servicio para obtener datos de usuarios
+    
+    @Autowired
+    private ExcelReportService excelReportService; // Servicio para generar archivos Excel
 
     /**
-     * Genera y exporta un reporte Excel con la información de todos los usuarios.
-     * Crea un archivo Excel con columnas para ID, Nombre, Email y Celular.
+     * Endpoint para exportar la lista de usuarios a un archivo Excel.
+     * Cuando se accede a /admin/reportes/usuarios, genera y descarga un archivo Excel
+     * con la información de todos los usuarios.
      *
-     * @param response Respuesta HTTP para escribir el archivo Excel
-     * @throws IOException si hay error al escribir el archivo
+     * @param response El objeto HttpServletResponse para enviar el archivo al cliente
+     * @throws IOException Si ocurre un error al escribir el archivo
      */
     @GetMapping("/usuarios")
     public void exportarUsuarios(HttpServletResponse response) throws IOException {
+        // 1. Obtener la lista completa de usuarios desde la base de datos
         List<User> usuarios = userService.findAllUsers();
 
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Usuarios");
+        // 2. Generar el archivo Excel usando el servicio especializado
+        // El servicio convierte los datos a un formato Excel y los devuelve como un stream
+        ByteArrayInputStream excelFile = excelReportService.exportUsuariosToExcel(usuarios);
 
-        // Crear el encabezado
-        Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("ID");
-        headerRow.createCell(1).setCellValue("Nombre");
-        headerRow.createCell(2).setCellValue("Email");
-        headerRow.createCell(3).setCellValue("Celular");
-
-        // Llenar los datos
-        int rowNum = 1;
-        for (User user : usuarios) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(user.getId());
-            row.createCell(1).setCellValue(user.getNombre());
-            row.createCell(2).setCellValue(user.getEmail());
-            row.createCell(3).setCellValue(user.getCelular());
-        }
-
-        // Configurar la respuesta HTTP
+        // 3. Configurar los headers de la respuesta HTTP
+        // Establecer el tipo de contenido para archivo Excel
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        // Configurar el nombre del archivo que se descargará
         response.setHeader("Content-Disposition", "attachment; filename=usuarios.xlsx");
 
-        // Escribir el libro de trabajo en la respuesta
-        workbook.write(response.getOutputStream());
-        workbook.close();
+        // 4. Escribir el contenido del Excel en la respuesta
+        // IOUtils.copy copia el contenido del archivo al stream de salida de la respuesta
+        IOUtils.copy(excelFile, response.getOutputStream());
+        // No es necesario cerrar los streams ya que Spring los maneja automáticamente
     }
 }

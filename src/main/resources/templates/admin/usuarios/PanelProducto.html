@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Productos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/admin/auth/panel-producto.css}">
+    <link rel="stylesheet" th:href="@{/css/perfilusuario.css}">
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -19,7 +21,7 @@
                     <div class="main-menu">
                         <a th:href="@{/admin/inicio}" class="nav-link"><i class="fas fa-home"></i>Inicio</a>
                         <a th:href="@{/admin/productos}" class="nav-link"><i class="fas fa-box"></i>Productos</a>
-                        <a th:href="@{/admin/ventas}" class="nav-link"><i class="fas fa-shopping-cart"></i>Ventas</a>
+                        <a th:href="@{/admin/ventas}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i>Comprobantes</a>
                         <a th:href="@{/admin/pedidos}" class="nav-link"><i class="fas fa-clipboard-list"></i>Pedidos</a>
                         <a th:href="@{/admin/clientes}" class="nav-link"><i class="fas fa-users"></i>Clientes</a>
                         <a th:href="@{/admin/usuarios}" class="nav-link"><i class="fas fa-user"></i>Usuarios</a>
@@ -29,13 +31,13 @@
                     </div>
                 </nav>
             </div>
-            
+
             <!-- Contenido principal -->
             <div class="content-area">
                 <div class="products-header">
                     <h1>Panel de Productos</h1>
                 </div>
-                
+
                 <div class="product-list-area">
                     <table class="product-table">
                         <thead>
@@ -55,10 +57,11 @@
                         </thead>
                         <tbody>
                             <tr th:each="producto, iterStat : ${productos}">
-                                <td th:text="${iterStat.count}"></td>  <!-- Esto mostrará 1, 2, 3... secuencialmente -->
+                                <td th:text="${iterStat.count}"></td>
+                                <!-- Esto mostrará 1, 2, 3... secuencialmente -->
                                 <td th:text="${producto.nombre}"></td>
                                 <td th:text="${producto.descripcion}"></td>
-                                <td th:text="${'$' + producto.precio}"></td>
+                                <td th:text="${'S/' + producto.precio}"></td>
                                 <td th:text="${producto.fechaVencimiento}"></td>
                                 <td th:text="${producto.unidadMedida}"></td>
                                 <td th:text="${producto.fechaIngreso}"></td>
@@ -75,7 +78,7 @@
                 </div>
                 <button id="add-product-btn" class="btn btn-primary">Agregar Nuevo Producto</button>
             </div>
-            
+
             <!-- Agregar el modal -->
             <div id="productoModal" class="modal">
                 <div class="modal-content">
@@ -131,4 +134,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script th:src="@{/js/panel-producto.js}"></script>
 </body>
+
 </html>

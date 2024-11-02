@@ -56,9 +56,17 @@ public class CustomersController {
     @ResponseBody
     public ResponseEntity<Customers> createCliente(@RequestBody Customers cliente) {
         try {
+            System.out.println("DEBUG: Creando cliente: " + cliente.toString());
+            if (cliente.getNombre() == null || cliente.getNombre().isEmpty()) {
+                return ResponseEntity.badRequest().build();
+            }
+            
             Customers nuevoCliente = customersService.save(cliente);
+            System.out.println("DEBUG: Cliente creado con ID: " + nuevoCliente.getId());
             return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
         } catch (Exception e) {
+            System.out.println("ERROR al crear cliente: " + e.getMessage());
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -66,22 +74,45 @@ public class CustomersController {
     @PutMapping("/api/cliente/{id}")
     @ResponseBody
     public ResponseEntity<Customers> updateCliente(@PathVariable Long id, @RequestBody Customers cliente) {
-        return customersService.findById(id)
-                .map(clienteExistente -> {
-                    cliente.setId(id);
-                    return new ResponseEntity<>(customersService.save(cliente), HttpStatus.OK);
-                })
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        try {
+            System.out.println("DEBUG: Actualizando cliente ID: " + id);
+            return customersService.findById(id)
+                    .map(clienteExistente -> {
+                        // Actualizar todos los campos
+                        clienteExistente.setNombre(cliente.getNombre());
+                        clienteExistente.setApellido(cliente.getApellido());
+                        clienteExistente.setEmail(cliente.getEmail());
+                        clienteExistente.setCelular(cliente.getCelular());
+                        clienteExistente.setDni(cliente.getDni());
+                        
+                        Customers clienteActualizado = customersService.save(clienteExistente);
+                        System.out.println("DEBUG: Cliente actualizado exitosamente");
+                        return new ResponseEntity<>(clienteActualizado, HttpStatus.OK);
+                    })
+                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        } catch (Exception e) {
+            System.out.println("ERROR al actualizar cliente: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("/api/cliente/{id}")
     @ResponseBody
     public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
-        return customersService.findById(id)
-                .map(cliente -> {
-                    customersService.deleteById(id);
-                    return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-                })
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        try {
+            System.out.println("DEBUG: Eliminando cliente ID: " + id);
+            return customersService.findById(id)
+                    .map(cliente -> {
+                        customersService.deleteById(id);
+                        System.out.println("DEBUG: Cliente eliminado exitosamente");
+                        return new ResponseEntity<Void>(HttpStatus.OK); // Cambiado a OK para mejor manejo en el frontend
+                    })
+                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        } catch (Exception e) {
+            System.out.println("ERROR al eliminar cliente: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

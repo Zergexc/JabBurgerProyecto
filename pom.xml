@@ -99,7 +99,7 @@
 			<version>6.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Otras dependencias -->
+		<!-- Apache POI para generar archivos Excel -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -110,7 +110,7 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.3</version>
 		</dependency>
-		<!-- Apache Commons IO -->
+		<!-- Apache Commons IO para copiar archivos -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>

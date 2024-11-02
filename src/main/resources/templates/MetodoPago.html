@@ -33,54 +33,27 @@
     
     <main>
         <section class="cart">
-            <h2>Continuar con la compra</h2>
+            <h2>Resumen de compra</h2>
             <div class="cart-items">
-                <div class="cart-item">
-                    <img th:src="@{/images/producto.png}" alt="Hamburguesa 1">
+                <!-- Iteramos sobre los items del carrito -->
+                <div th:each="item : ${items}" class="cart-item">
+                    <img th:src="@{${item.imagen}}" th:alt="${item.nombre}">
                     <div class="item-details">
-                        <h3>Hamburguesa 1</h3>
-                        <p>Lorem ipsum</p>
-                    </div>
-                    <div class="item-quantity">
-                        <span> <strong>5 </strong></span>
-                    </div>
-                    <div class="item-price">
-                        <p>S/ 20.00</p>
+                        <h3 th:text="${item.nombre}">Nombre Producto</h3>
+                        <div class="item-quantity">
+                            <span>Cantidad: <strong th:text="${item.cantidad}">1</strong></span>
+                        </div>
+                        <div class="item-price">
+                            <p>S/ <span th:text="${#numbers.formatDecimal(item.precio * item.cantidad, 1, 2)}">0.00</span></p>
+                        </div>
                     </div>
                 </div>
-                <!-- Repetir cart-item para otros productos -->
             </div>
-            <div class="cart-items">
-                <div class="cart-item">
-                    <img th:src="@{/images/producto.png}" alt="Hamburguesa 1">
-                    <div class="item-details">
-                        <h3>Hamburguesa 1</h3>
-                        <p>Lorem ipsum</p>
-                    </div>
-                    <div class="item-quantity">
-                        <span> <strong>5 </strong></span>
-                    </div>
-                    <div class="item-price">
-                        <p>S/ 20.00</p>
-                    </div>
-                </div>
-                <!-- Repetir cart-item para otros productos -->
-            </div>
-            <div class="cart-items">
-                <div class="cart-item">
-                    <img th:src="@{/images/producto.png}" alt="Hamburguesa 1">
-                    <div class="item-details">
-                        <h3>Hamburguesa 1</h3>
-                        <p>Lorem ipsum</p>
-                    </div>
-                    <div class="item-quantity">
-                        <span> <strong>5 </strong></span>
-                    </div>
-                    <div class="item-price">
-                        <p>S/ 20.00</p>
-                    </div>
-                </div>
-                <!-- Repetir cart-item para otros productos -->
+            
+            <div class="summary">
+                <p>Subtotal: <span>S/ <span th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">0.00</span></span></p>
+                <p>Delivery: <span>S/ <span th:text="${#numbers.formatDecimal(delivery, 1, 2)}">4.00</span></span></p>
+                <p class="total">Total: <span>S/ <span th:text="${#numbers.formatDecimal(total, 1, 2)}">0.00</span></span></p>
             </div>
         </section>
         
