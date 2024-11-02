@@ -34,6 +34,7 @@
                 <a th:href="@{/login}" title="Iniciar sesión"><i class="fas fa-user"></i></a>
                 <a href="#" title="Carrito" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
                 </a>
             </div>
         </div>
@@ -44,124 +45,63 @@
             <h2>Filtrar por:</h2>
             <ul>
                 <li><a href="#" data-filter="all" class="active"><i class="fas fa-utensils"></i> Todos</a></li>
-                <li><a href="#" data-filter="hamburguesas"><i class="fas fa-hamburger"></i> Hamburguesas</a></li>
-                <li><a href="#" data-filter="bebidas"><i class="fas fa-glass-martini-alt"></i> Bebidas</a></li>
-                <li><a href="#" data-filter="combos"><i class="fas fa-concierge-bell"></i> Combos</a></li>
+                <li><a href="#" data-filter="hamburguesa"><i class="fas fa-hamburger"></i> Hamburguesas</a></li>
+                <li><a href="#" data-filter="bebida"><i class="fas fa-glass-martini-alt"></i> Bebidas</a></li>
+                <li><a href="#" data-filter="combo"><i class="fas fa-concierge-bell"></i> Combos</a></li>
             </ul>
         </aside>
 
         <div class="main-content">
             <h1>Nuestra Carta</h1>
             <div class="container">
-                <!--Hamburguesas -->
-                <div class="card" data-category="hamburguesas">
-                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 1">
+                <!-- Hamburguesas -->
+                <div th:each="hamburguesa : ${hamburguesas}" class="card" data-category="hamburguesa">
+                    <img th:src="@{${hamburguesa.imagen}}" th:alt="${hamburguesa.nombre}">
                     <div class="card-content">
-                        <h3>Hamburguesa de Res</h3>
-                        <p>Deliciosa hamburguesa de res con queso, lechuga, tomate y cebolla. Servida con patatas fritas.</p>
-                        <p class="price">S/10.00</p>
-                        <button>Agregar al carrito</button>
+                        <h3 th:text="${hamburguesa.nombre}">Nombre Hamburguesa</h3>
+                        <p th:text="${hamburguesa.descripcion}">Descripción</p>
+                        <p class="price">S/<span th:text="${#numbers.formatDecimal(hamburguesa.precio, 1, 2)}">0.00</span></p>
+                        <button th:data-id="${hamburguesa.productoID}" 
+                                th:data-nombre="${hamburguesa.nombre}"
+                                th:data-precio="${hamburguesa.precio}"
+                                th:data-imagen="@{${hamburguesa.imagen}}"
+                                onclick="agregarAlCarrito(this)">
+                            Agregar al carrito
+                        </button>
                     </div>
                 </div>
-                <div class="card" data-category="hamburguesas">
-                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 2">
+
+                <!-- Bebidas -->
+                <div th:each="bebida : ${bebidas}" class="card" data-category="bebida">
+                    <img th:src="@{${bebida.imagen}}" th:alt="${bebida.nombre}">
                     <div class="card-content">
-                        <h3>Hamburguesa Doble</h3>
-                        <p>Doble carne de res, doble queso, lechuga, tomate y nuestra salsa especial. Acompañada de papas fritas.</p>
-                        <p class="price">S/12.00</p>
-                        <button>Agregar al carrito</button>
+                        <h3 th:text="${bebida.nombre}">Nombre Bebida</h3>
+                        <p th:text="${bebida.descripcion}">Descripción</p>
+                        <p class="price">S/<span th:text="${#numbers.formatDecimal(bebida.precio, 1, 2)}">0.00</span></p>
+                        <button th:data-id="${bebida.productoID}"
+                                th:data-nombre="${bebida.nombre}"
+                                th:data-precio="${bebida.precio}"
+                                th:data-imagen="@{${bebida.imagen}}"
+                                onclick="agregarAlCarrito(this)">
+                            Agregar al carrito
+                        </button>
                     </div>
                 </div>
-                <div class="card" data-category="hamburguesas">
-                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 2">
+
+                <!-- Combos -->
+                <div th:each="combo : ${combos}" class="card" data-category="combo">
+                    <img th:src="@{${combo.imagen}}" th:alt="${combo.nombre}">
                     <div class="card-content">
-                        <h3>Hamburguesa Doble</h3>
-                        <p>Doble carne de res, doble queso, lechuga, tomate y nuestra salsa especial. Acompañada de papas fritas.</p>
-                        <p class="price">S/12.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="hamburguesas">
-                    <img th:src="@{/images/Hamburguesa Doble Carne.png}" alt="Hamburguesa 2">
-                    <div class="card-content">
-                        <h3>Hamburguesa Doble</h3>
-                        <p>Doble carne de res, doble queso, lechuga, tomate y nuestra salsa especial. Acompañada de papas fritas.</p>
-                        <p class="price">S/12.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <!--Bebidas -->
-                <div class="card" data-category="bebidas">
-                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
-                    <div class="card-content">
-                        <h3>Coca Cola</h3>
-                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
-                        <p class="price">S/2.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="bebidas">
-                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
-                    <div class="card-content">
-                        <h3>Coca Cola</h3>
-                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
-                        <p class="price">S/2.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="bebidas">
-                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
-                    <div class="card-content">
-                        <h3>Coca Cola</h3>
-                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
-                        <p class="price">S/2.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="bebidas">
-                    <img th:src="@{/images/cocacola.png}" alt="Gaseosa">
-                    <div class="card-content">
-                        <h3>Coca Cola</h3>
-                        <p>Refrescante bebida gaseosa de cola, perfecta para acompañar tu hamburguesa.</p>
-                        <p class="price">S/2.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <!--Combos -->
-                <div class="card" data-category="combos">
-                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
-                    <div class="card-content">
-                        <h3>Combo Hamburguesa</h3>
-                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
-                        <p class="price">S/15.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="combos">
-                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
-                    <div class="card-content">
-                        <h3>Combo Hamburguesa</h3>
-                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
-                        <p class="price">S/15.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="combos">
-                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
-                    <div class="card-content">
-                        <h3>Combo Hamburguesa</h3>
-                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
-                        <p class="price">S/15.00</p>
-                        <button>Agregar al carrito</button>
-                    </div>
-                </div>
-                <div class="card" data-category="combos">
-                    <img th:src="@{/images/Combo Hamburguesa.png}" alt="Combo Hamburguesa">
-                    <div class="card-content">
-                        <h3>Combo Hamburguesa</h3>
-                        <p>Hamburguesa de res, papas fritas y refresco. ¡La combinación perfecta!</p>
-                        <p class="price">S/15.00</p>
-                        <button>Agregar al carrito</button>
+                        <h3 th:text="${combo.nombre}">Nombre Combo</h3>
+                        <p th:text="${combo.descripcion}">Descripción</p>
+                        <p class="price">S/<span th:text="${#numbers.formatDecimal(combo.precio, 1, 2)}">0.00</span></p>
+                        <button th:data-id="${combo.productoID}"
+                                th:data-nombre="${combo.nombre}"
+                                th:data-precio="${combo.precio}"
+                                th:data-imagen="@{${combo.imagen}}"
+                                onclick="agregarAlCarrito(this)">
+                            Agregar al carrito
+                        </button>
                     </div>
                 </div>
             </div>
@@ -172,16 +112,19 @@
                 <h2>Carrito</h2>
                 <button id="close-cart" class="close-cart">&times;</button>
             </div>
-            <ul id="cart-items"></ul>
+            <ul id="cart-items">
+                <p class="cart-empty">Tu carrito está vacío</p>
+            </ul>
             <div class="cart-total">
-                <span class="cart-total-label">Total:</span>
-                <span class="cart-total-amount">$<span id="cart-total">0.00</span></span>
+                <span>Total:</span>
+                <span class="total-amount">S/<span id="cart-total">0.00</span></span>
             </div>
-            <button id="checkout-button">Pagar</button>
+            <button id="checkout-button" class="btn-pagar">PAGAR</button>
         </div>
     </main>
-
+    <!-- Al final del body, antes de cerrar </body> -->
+    <script th:src="@{/js/carrito.js}"></script>
     <script th:src="@{/js/menu.js}"></script>
-</body>
+</body> 
 
 </html>

@@ -1,11 +1,16 @@
 package com.jab.burger.jabburger.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "payments")
@@ -24,6 +29,9 @@ public class Payment {
     private LocalDateTime paymentDate;
     private Double total;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private List<PaymentItem> items = new ArrayList<>();
 
     // Getters and setters
 
@@ -102,5 +110,13 @@ public class Payment {
     }
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public List<PaymentItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<PaymentItem> items) {
+        this.items = items;
     }
 }

@@ -2,6 +2,8 @@ package com.jab.burger.jabburger.controllers;
 
 import com.jab.burger.jabburger.models.Payment;
 import com.jab.burger.jabburger.services.PaymentService;
+import com.jab.burger.jabburger.services.CarritoService;
+import com.jab.burger.jabburger.models.Carrito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,21 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private CarritoService carritoService;
+
     @GetMapping("/metodopago")
     public String showPaymentPage(Model model) {
-        model.addAttribute("total", 64.00);
+        Carrito carrito = carritoService.getCarrito();
+        Double subtotal = carrito.getTotal();
+        Double delivery = 4.00;
+        Double total = subtotal + delivery;
+
+        model.addAttribute("items", carrito.getItems());
+        model.addAttribute("subtotal", subtotal);
+        model.addAttribute("delivery", delivery);
+        model.addAttribute("total", total);
+
         return "MetodoPago";
     }
 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Pedidos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/pedido.css}">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Barra lateral -->
+            <div class="sidebar">
+                <div class="sidebar-logo">
+                    <img th:src="@{/images/logo.jpg}" alt="Logo de JabBurger">
+                </div>
+                <nav>
+                    <div class="main-menu">
+                        <a th:href="@{/admin/inicio}" class="nav-link"><i class="fas fa-home"></i>Inicio</a>
+                        <a th:href="@{/admin/productos}" class="nav-link"><i class="fas fa-box"></i>Productos</a>
+                        <a th:href="@{/admin/ventas}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i>Comprobantes</a>
+                        <a th:href="@{/admin/pedidos}" class="nav-link active"><i class="fas fa-clipboard-list"></i>Pedidos</a>
+                        <a th:href="@{/admin/clientes}" class="nav-link"><i class="fas fa-users"></i>Clientes</a>
+                        <a th:href="@{/admin/usuarios}" class="nav-link"><i class="fas fa-user"></i>Usuarios</a>
+                    </div>
+                    <div class="bottom-menu">
+                        <a th:href="@{/logout}" class="nav-link"><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="content-area">
+                <div class="users-header">
+                    <h1>Pedidos</h1>
+                </div>
+
+                <div class="pedido-list-area">
+                    <table class="pedido-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Cliente ID</th>
+                                <th>Empleado ID</th>
+                                <th>Monto Total</th>
+                                <th>Estado</th>
+                                <th>Método Entrega</th>
+                                <th>Proveedor Pago ID</th>
+                                <th>Transacción Pago ID</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pedidoTableBody">
+                            <tr th:each="pedido : ${pedidos}">
+                                <td th:text="${pedido.id}">1</td>
+                                <td th:text="${#dates.format(pedido.fecha, 'dd/MM/yyyy HH:mm')}">01/01/2024</td>
+                                <td th:text="${pedido.clienteId}">1</td>
+                                <td th:text="${pedido.empleadoId}">1</td>
+                                <td th:text="${pedido.montoTotal}">100.00</td>
+                                <td th:text="${pedido.estado}">Pendiente</td>
+                                <td th:text="${pedido.metodoEntrega}">Presencial</td>
+                                <td th:text="${pedido.proveedorPagoId}">1</td>
+                                <td th:text="${pedido.transaccionPagoId}">1</td>
+                                <td>
+                                    <button th:onclick="'editPedido(' + ${pedido.id} + ')'" class="btn btn-primary">Editar</button>
+                                    <button th:onclick="'deletePedido(' + ${pedido.id} + ')'" class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" id="btnAgregarPedido" class="btn btn-success">Agregar Pedido</button>
+
+                <div id="pedidoModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2 id="modalTitle">Agregar Pedido</h2>
+                        <form id="pedidoForm">
+                            <input type="hidden" id="pedidoId">
+                            <div class="form-group">
+                                <label for="clienteId">Cliente ID:</label>
+                                <input type="number" id="clienteId" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="empleadoId">Empleado ID:</label>
+                                <input type="number" id="empleadoId" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="montoTotal">Monto Total:</label>
+                                <input type="number" step="0.01" id="montoTotal" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado">Estado:</label>
+                                <select id="estado" required>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="En Proceso">En Proceso</option>
+                                    <option value="Completado">Completado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="metodoEntrega">Método de Entrega:</label>
+                                <select id="metodoEntrega" required>
+                                    <option value="Delivery">Delivery</option>
+                                    <option value="Presencial">Presencial</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="proveedorPagoId">Proveedor de Pago ID:</label>
+                                <input type="number" id="proveedorPagoId">
+                            </div>
+                            <div class="form-group">
+                                <label for="transaccionPagoId">Transacción de Pago ID:</label>
+                                <input type="number" id="transaccionPagoId">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/pedidos.js}"></script>
+</body>
+
+</html>
